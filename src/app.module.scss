@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  height: 100%;
+  .requestBox {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    gap: 1rem;
+    border-top: 1px solid#444;
+
+    &.active,
+    &.active + .requestBox {
+      border-top: 1px solid var(--primary);
+    }
+
+    .batchNumber {
+      color: var(--primary);
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+}
