@@ -30,3 +30,19 @@ code {
   width: 100%;
   height: 100%;
 }
+
+.json-container {
+  background-color: transparent !important;
+  color: #a4a4a4 !important;
+  .json-key {
+    color: white !important;
+  }
+  .json-value.json-string {
+    white-space: nowrap !important;
+    &::before,
+    &::after {
+      content: '"' !important;
+      display: inline-block !important;
+    }
+  }
+}

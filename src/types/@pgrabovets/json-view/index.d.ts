@@ -1,4 +1,4 @@
 declare module '@pgrabovets/json-view' {
-  const content: any;
-  export default content;
+  const jsonview: any;
+  export default jsonview;
 }

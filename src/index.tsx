@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import './index.css';
+import './index.scss';
 import App from './App';
 import { ReqCtxProvider } from './store/context';
 

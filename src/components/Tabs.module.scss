@@ -7,12 +7,34 @@
   bottom: 0;
   background: var(--dark-bg);
   box-shadow: -3px 0px 4px 1px rgb(0, 0, 0, 0.5);
-  .tabs {
+  .header {
+    width: 100%;
     display: flex;
-    border-bottom: 1px solid #444;
-    & > * {
-      padding: 0.2rem 0.4rem;
-      border-right: 1px solid #444;
+    justify-content: space-between;
+    align-items: center;
+    .tabs {
+      display: flex;
+      width: 100%;
+      &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #444;
+      }
+      .tab {
+        &.active {
+          background: var(--dark-bg);
+        }
+        background: #444;
+        cursor: pointer;
+        padding: 0.2rem 0.4rem;
+        border-right: 1px solid #444;
+      }
+    }
+    .close {
+      cursor: pointer;
+      margin-right: 0.2rem;
+      stroke-width: 2px;
     }
   }
 }
