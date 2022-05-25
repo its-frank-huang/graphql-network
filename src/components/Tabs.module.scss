@@ -1,7 +1,7 @@
 .container {
   position: absolute;
   border-left: 1px solid #444;
-  width: 70%;
+  left: 30%;
   right: 0;
   top: 0;
   bottom: 0;
@@ -32,6 +32,9 @@
       }
     }
     .close {
+      position: absolute;
+      right: 0;
+      z-index: 10;
       cursor: pointer;
       margin-right: 0.2rem;
       stroke-width: 2px;
