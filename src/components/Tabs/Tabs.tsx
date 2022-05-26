@@ -1,7 +1,8 @@
 import { createSignal, Index, Show, Accessor, JSX, onMount } from 'solid-js';
+import ResizablePanel from '../ResizablePanel';
 import style from './Tabs.module.scss';
 
-export const Tabs = ({
+const Tabs = ({
   tabs,
   onClose,
 }: {
@@ -14,40 +15,8 @@ export const Tabs = ({
   onClose: () => void;
 }) => {
   const [currentTab, setCurrentTab] = createSignal(0);
-  let containerRef: HTMLDivElement;
-  onMount(() => {
-    console.log(containerRef, containerRef?.parentElement);
-    if (!containerRef || !containerRef.parentElement) return;
-    const parent = containerRef.parentElement;
-    let isMouseDown = false;
-    let isAdjusting = false;
-    parent.addEventListener('mousemove', (e) => {
-      const panelLeft = containerRef.getBoundingClientRect().left;
-      if (
-        isAdjusting ||
-        (e.clientX > panelLeft - 5 && e.clientX < panelLeft + 5)
-      ) {
-        parent.style.cursor = 'ew-resize';
-        if (isMouseDown) {
-          isAdjusting = true;
-          containerRef.style.left = e.clientX + 'px';
-        } else {
-          isAdjusting = false;
-        }
-      } else {
-        parent.style.cursor = 'unset';
-      }
-    });
-
-    parent.addEventListener('mousedown', (e) => {
-      isMouseDown = true;
-    });
-    parent.addEventListener('mouseup', (e) => {
-      isMouseDown = false;
-    });
-  });
   return (
-    <div class={style.container} ref={(el) => (containerRef = el)}>
+    <ResizablePanel handleName="DATA" side="left" defaultPlacement="30%">
       <div class={style.header}>
         <div class={style.tabs}>
           <Index each={tabs()}>
@@ -78,6 +47,7 @@ export const Tabs = ({
           {(tab, i) => <Show when={i === currentTab()}>{tab().content()}</Show>}
         </Index>
       </div>
-    </div>
+    </ResizablePanel>
   );
 };
+export default Tabs;

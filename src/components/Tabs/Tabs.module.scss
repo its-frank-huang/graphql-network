@@ -1,0 +1,36 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .tabs {
+    display: flex;
+    width: 100%;
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid #444;
+    }
+    .tab {
+      &.active {
+        background: var(--dark-bg);
+      }
+      background: #444;
+      cursor: pointer;
+      padding: 0.2em 0.4em;
+      border-right: 1px solid #444;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    cursor: pointer;
+    margin-right: 0.2em;
+    stroke-width: 2px;
+  }
+}
+.tabContent {
+  height: 100%;
+}

@@ -1,0 +1,39 @@
+.container {
+  position: absolute;
+  background: var(--dark-bg);
+  box-shadow: -3px 0px 4px 1px rgb(0, 0, 0, 0.5);
+  display: flex;
+  &.left {
+    height: 100%;
+    flex-direction: row;
+    border-left: 1px solid #444;
+    top: 0;
+    right: 0;
+    & > .handle {
+      width: 16px;
+      border-right: 1px solid #444;
+      word-break: break-all;
+    }
+  }
+  &.top {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    flex-direction: column;
+    border-top: 1px solid #444;
+    & > .handle {
+      height: 16px;
+      border-bottom: 1px solid #444;
+    }
+  }
+  .handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    padding: 0.2em;
+  }
+  .content {
+    width: 100%;
+  }
+}

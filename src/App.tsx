@@ -8,8 +8,9 @@ import {
 } from 'solid-js';
 import { useReqCtx } from './store/context';
 import style from './app.module.scss';
-import { Tabs } from './components/Tabs';
-import jsonview from '@pgrabovets/json-view';
+import Tabs from './components/Tabs';
+import JsonView from './components/JsonView';
+import ResizablePanel from './components/ResizablePanel';
 
 const App: Component = () => {
   const { reqList } = useReqCtx();
@@ -21,37 +22,41 @@ const App: Component = () => {
       {
         title: 'Request',
         content: () => {
-          onMount(() => {
-            const tree = jsonview.create(JSON.stringify(request.variables));
-            jsonview.render(tree, document.getElementById('request_json_view'));
-            tree.el.querySelector('.json-key').innerText = 'variables';
-            if (tree.children.length > 0) {
-              const icon = tree.el.querySelector('.caret-icon');
-              if (icon) {
-                icon.classList.replace('fa-caret-right', 'fa-caret-down');
-              }
-              tree.isExpanded = true;
-              tree.children.forEach((child: any) => {
-                child.el.classList.remove('hidden');
-              });
-            } else {
-              tree.el.querySelector('.json-value').innerText = '{0}';
-            }
-          });
-          return <div id="request_json_view"></div>;
+          const json = JSON.stringify(request.variables, null, 2);
+          return (
+            <>
+              <JsonView json={json} name="variables" />
+              <ResizablePanel
+                handleName="RAW"
+                containerClassName={style.rawJsonContainer}
+                className={style.rawJsonContent}
+                side="top"
+                defaultPlacement="80%"
+              >
+                <pre>{json}</pre>
+              </ResizablePanel>
+            </>
+          );
         },
       },
       {
         title: 'Response',
         content: () => {
-          onMount(() => {
-            const tree = jsonview.create(response);
-            jsonview.render(
-              tree,
-              document.getElementById('response_json_view'),
-            );
-          });
-          return <div id="response_json_view"></div>;
+          const json = JSON.stringify(response, null, 2);
+          return (
+            <>
+              <JsonView json={json} name="response" />
+              <ResizablePanel
+                handleName="RAW"
+                containerClassName={style.rawJsonContainer}
+                className={style.rawJsonContent}
+                side="top"
+                defaultPlacement="80%"
+              >
+                <pre>{json}</pre>
+              </ResizablePanel>
+            </>
+          );
         },
       },
     ];

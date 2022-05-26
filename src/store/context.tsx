@@ -39,20 +39,20 @@ export const ReqCtxProvider: Component<{ children: JSX.Element }> = (props) => {
       return;
     batchNumber++;
     try {
-      const response: string = await new Promise((resolved) =>
-        req.getContent((content) => resolved(content)),
+      const response: any = await new Promise((resolved) =>
+        req.getContent((content) => resolved(JSON.parse(content))),
       );
       const requestPayload = JSON.parse(req.request.postData?.text ?? '');
       const url = req.request.url;
       value.pushReq(
-        requestPayload.map(({ operationName, variables }: any) => ({
+        requestPayload.map(({ operationName, variables }: any, i: number) => ({
           url,
           request: {
             operationName,
             variables,
           },
           batchNumber,
-          response,
+          response: response[i],
         })),
       );
     } catch (e) {
