@@ -16,7 +16,12 @@ const Tabs = ({
 }) => {
   const [currentTab, setCurrentTab] = createSignal(0);
   return (
-    <ResizablePanel handleName="DATA" side="left" defaultPlacement="30%">
+    <ResizablePanel
+      className={style.container}
+      handleName="DATA"
+      side="left"
+      defaultPlacement="30%"
+    >
       <div class={style.header}>
         <div class={style.tabs}>
           <Index each={tabs()}>
@@ -31,8 +36,8 @@ const Tabs = ({
           </Index>
         </div>
         <svg
-          width={16}
-          height={16}
+          width={14}
+          height={14}
           viewBox="0 0 20 20"
           class={style.close}
           onClick={onClose}

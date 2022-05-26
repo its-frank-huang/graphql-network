@@ -13,6 +13,7 @@
       width: 16px;
       border-right: 1px solid #444;
       word-break: break-all;
+      padding: 2em 0.2rem;
     }
   }
   &.top {
@@ -24,6 +25,7 @@
     & > .handle {
       height: 16px;
       border-bottom: 1px solid #444;
+      padding: 0.2em 2rem;
     }
   }
   .handle {
@@ -31,7 +33,6 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
-    padding: 0.2em;
   }
   .content {
     width: 100%;
