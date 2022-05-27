@@ -20,11 +20,18 @@
       font-weight: bold;
     }
   }
-
+  .jsonView {
+    overflow: auto;
+  }
   .rawJsonContainer {
     box-shadow: none;
     .rawJsonContent {
+      height: 100%;
+      overflow: auto;
       padding: 0px 1em;
+      & > * {
+        height: 100%;
+      }
     }
   }
 }

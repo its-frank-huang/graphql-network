@@ -1,11 +1,4 @@
-import {
-  Component,
-  createMemo,
-  createSignal,
-  Index,
-  onMount,
-  Show,
-} from 'solid-js';
+import { Component, createMemo, createSignal, Index, Show } from 'solid-js';
 import { useReqCtx } from './store/context';
 import style from './app.module.scss';
 import Tabs from './components/Tabs';
@@ -25,7 +18,9 @@ const App: Component = () => {
           const json = JSON.stringify(request.variables, null, 2);
           return (
             <>
-              <JsonView json={json} name="variables" />
+              <div class={style.jsonView}>
+                <JsonView json={json} name="variables" />
+              </div>
               <ResizablePanel
                 handleName="RAW"
                 containerClassName={style.rawJsonContainer}
@@ -33,7 +28,18 @@ const App: Component = () => {
                 side="top"
                 defaultPlacement="80%"
               >
-                <pre>{json}</pre>
+                <pre
+                // onClick={(e) => {
+                //   const selection = window.getSelection();
+                //   selection?.removeAllRanges();
+
+                //   const range = document.createRange();
+                //   range.selectNodeContents(e.target);
+                //   selection?.addRange(range);
+                // }}
+                >
+                  {json}
+                </pre>
               </ResizablePanel>
             </>
           );
@@ -45,7 +51,9 @@ const App: Component = () => {
           const json = JSON.stringify(response, null, 2);
           return (
             <>
-              <JsonView json={json} name="response" />
+              <div class={style.jsonView}>
+                <JsonView json={json} name="response" />
+              </div>
               <ResizablePanel
                 handleName="RAW"
                 containerClassName={style.rawJsonContainer}
@@ -53,7 +61,18 @@ const App: Component = () => {
                 side="top"
                 defaultPlacement="80%"
               >
-                <pre>{json}</pre>
+                <pre
+                // onClick={(e) => {
+                //   const selection = window.getSelection();
+                //   selection?.removeAllRanges();
+
+                //   const range = document.createRange();
+                //   range.selectNodeContents(e.target);
+                //   selection?.addRange(range);
+                // }}
+                >
+                  {json}
+                </pre>
               </ResizablePanel>
             </>
           );

@@ -10,7 +10,7 @@ export interface ResizablePanelProps {
   handleName: string;
 }
 const MinDivSize = 16;
-
+const MouseLeaveMargin = 4;
 const ResizablePanel: ParentComponent<ResizablePanelProps> = ({
   children,
   side,
@@ -30,10 +30,9 @@ const ResizablePanel: ParentComponent<ResizablePanelProps> = ({
     )
       parent.style.position = 'relative';
     parent.style.overflow = 'hidden';
-    let isMouseDown = false;
-    let isMouseIn = false;
+    let isMouseInHandle = false;
     let isAdjusting = false;
-    let status: 'expand' | 'between' | 'collapsed' = 'between';
+    let mouseDownOffset = 0;
     parent.addEventListener('mousemove', (e) => {
       const parentPos = parent.getBoundingClientRect();
       const parentSize = parentPos[side === 'left' ? 'width' : 'height'];
@@ -44,32 +43,42 @@ const ResizablePanel: ParentComponent<ResizablePanelProps> = ({
       const divSize = parentSize - divValue;
 
       const mousePos = side === 'top' ? e.clientY : e.clientX;
+      const minDivValue = divValue - (MinDivSize - divSize);
 
-      if (isAdjusting || isMouseIn) {
+      if (isAdjusting) {
+        containerRef.style[side] =
+          Math.max(
+            0,
+            Math.min(minDivValue, mousePos - parentOffset - mouseDownOffset),
+          ) + 'px';
+      }
+
+      if (isMouseInHandle || isAdjusting) {
         parent.style.cursor = side === 'left' ? 'col-resize' : 'row-resize';
-        if (isMouseDown) {
-          isAdjusting = true;
-          if (divSize < MinDivSize && status !== 'collapsed') {
-            containerRef.style[side] = divValue - (MinDivSize - divSize) + 'px';
-            isAdjusting = false;
-            isMouseDown = false;
-            status = 'collapsed';
-          } else {
-            status = 'between';
-            containerRef.style[side] = mousePos - parentOffset + 'px';
-          }
-        } else {
-          isAdjusting = false;
-        }
       } else {
         parent.style.cursor = 'unset';
       }
     });
 
-    handleRef.addEventListener('mouseenter', () => (isMouseIn = true));
-    handleRef.addEventListener('mouseleave', () => (isMouseIn = false));
-    parent.addEventListener('mousedown', () => (isMouseDown = true));
-    parent.addEventListener('mouseup', () => (isMouseDown = false));
+    handleRef.addEventListener('mouseenter', () => (isMouseInHandle = true));
+    handleRef.addEventListener('mouseleave', () => (isMouseInHandle = false));
+    handleRef.addEventListener('mousedown', (e) => {
+      mouseDownOffset =
+        e[side === 'left' ? 'clientX' : 'clientY'] -
+        containerRef.getBoundingClientRect()[side];
+      isAdjusting = true;
+    });
+    document.addEventListener('mouseup', () => (isAdjusting = false));
+    document.addEventListener('mousemove', (e) => {
+      if (
+        e.clientX <= MouseLeaveMargin ||
+        e.clientX >= window.innerWidth - MouseLeaveMargin ||
+        e.clientY <= MouseLeaveMargin ||
+        e.clientY >= window.innerHeight - MouseLeaveMargin
+      ) {
+        isAdjusting = false;
+      }
+    });
   });
   return (
     <div
