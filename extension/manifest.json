@@ -3,6 +3,6 @@
   "description": "Graphql nework inspector",
   "version": "0.1",
   "manifest_version": 3,
-  "permissions": [],
+  "permissions": ["clipboardWrite"],
   "devtools_page": "dist/index.html"
 }
