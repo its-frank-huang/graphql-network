@@ -4,6 +4,7 @@ import style from './app.module.scss';
 import Tabs from './components/Tabs';
 import JsonView from './components/JsonView';
 import ResizablePanel from './components/ResizablePanel';
+import { Duplicate } from './components/icon/Duplicate';
 
 const App: Component = () => {
   const { reqList } = useReqCtx();
@@ -28,6 +29,9 @@ const App: Component = () => {
                 side="top"
                 defaultPlacement="80%"
               >
+                <div>
+                  <Duplicate />
+                </div>
                 <pre
                 // onClick={(e) => {
                 //   const selection = window.getSelection();
@@ -61,18 +65,7 @@ const App: Component = () => {
                 side="top"
                 defaultPlacement="80%"
               >
-                <pre
-                // onClick={(e) => {
-                //   const selection = window.getSelection();
-                //   selection?.removeAllRanges();
-
-                //   const range = document.createRange();
-                //   range.selectNodeContents(e.target);
-                //   selection?.addRange(range);
-                // }}
-                >
-                  {json}
-                </pre>
+                <pre>{json}</pre>
               </ResizablePanel>
             </>
           );
