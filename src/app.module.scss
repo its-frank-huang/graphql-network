@@ -1,6 +1,20 @@
 .container {
   position: relative;
   height: 100%;
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 0.4em;
+    gap: 0.4em;
+    input {
+      width: 200px;
+      outline: none;
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 0.1em 0.3em;
+    }
+  }
   .requestBox {
     cursor: pointer;
     display: flex;
@@ -25,13 +39,24 @@
   }
   .rawJsonContainer {
     box-shadow: none;
+    .toolbar {
+      display: flex;
+      align-items: center;
+      margin-top: 0.6em;
+    }
     .rawJsonContent {
       height: 100%;
       overflow: auto;
       padding: 0px 1em;
-      & * {
-        height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      pre {
+        flex: 1;
       }
     }
   }
+}
+.DuplicateIcon {
+  cursor: pointer;
 }
