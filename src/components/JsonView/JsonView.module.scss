@@ -1,17 +1,3 @@
 .JsonView {
-  :global(.json-container) {
-    background-color: transparent !important;
-    color: #a4a4a4 !important;
-    :global(.json-key) {
-      color: white !important;
-    }
-    :global(.json-value):global(.json-string) {
-      white-space: nowrap !important;
-      &::before,
-      &::after {
-        content: '"' !important;
-        display: inline-block !important;
-      }
-    }
-  }
+  padding: 10px;
 }
